@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -11,21 +12,28 @@ import {colors, paddings} from './_base';
 import Loader from './common/Loader';
 
 const Category = props => {
+  const {
+    id,
+    limit = 15,
+    disableInfiniteScroll,
+    page: pageProp,
+    onSelect,
+  } = props;
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(null);
-  const [page, setPage] = useState(1);
-  const [noMoreData, setNoMoreData] = useState(false);
-  const limit = 10;
+  const [page, setPage] = useState(pageProp || 1);
+  const [noMoreData, setNoMoreData] = useState(disableInfiniteScroll);
 
   const loadItems = () => {
     setLoading(true);
     fetch(
-      `https://acamicaexample.herokuapp.com/books?category_id=0&_page=${page}&_limit=${limit}`,
+      `https://acamicaexample.herokuapp.com/books?category_id=${id}&_page=${page}&_limit=${limit}`,
     )
       .then(resp => resp.json())
       .then(dataFromServer => {
         setData([...data, ...dataFromServer]);
-        setNoMoreData(dataFromServer.length < limit);
+        setNoMoreData(disableInfiniteScroll || dataFromServer.length < limit);
       })
       .catch(err => {
         Alert.alert('oh snap!', err);
@@ -38,11 +46,15 @@ const Category = props => {
   };
 
   useEffect(() => {
+    loadItems();
+  }, []);
+
+  useEffect(() => {
     !loading && !noMoreData && loadItems();
   }, [page]);
 
   return (
-    <View style={styles.listContainer}>
+    <View>
       <FlatList
         data={data}
         keyExtractor={item => item.id}
@@ -50,9 +62,7 @@ const Category = props => {
           <TouchableHighlight
             style={styles.listItem}
             underlayColor={colors.primary}
-            onPress={() => {
-              console.log('pressed');
-            }}>
+            onPress={() => onSelect(item.id)}>
             <Text>{item.name}</Text>
           </TouchableHighlight>
         )}
@@ -64,10 +74,15 @@ const Category = props => {
   );
 };
 
+Category.propTypes = {
+  id: PropTypes.string.isRequired,
+  limit: PropTypes.number,
+  disableInfiniteScroll: PropTypes.bool,
+  page: PropTypes.number,
+  onSelect: PropTypes.func,
+};
+
 const styles = StyleSheet.create({
-  listContainer: {
-    paddingTop: paddings.lg,
-  },
   listItem: {
     flex: 1,
     padding: paddings.md,

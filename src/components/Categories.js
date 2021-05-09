@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -11,6 +12,8 @@ import {colors, paddings} from './_base';
 import Loader from './common/Loader';
 
 const Categories = props => {
+  const {onSelect} = props;
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(null);
 
@@ -35,15 +38,17 @@ const Categories = props => {
           <TouchableHighlight
             style={styles.listItem}
             underlayColor={colors.primary}
-            onPress={() => {
-              console.log('pressed');
-            }}>
+            onPress={() => onSelect(item.id)}>
             <Text>{item.name}</Text>
           </TouchableHighlight>
         )}
       />
     </View>
   );
+};
+
+Categories.propTypes = {
+  onSelect: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

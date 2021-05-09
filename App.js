@@ -15,6 +15,8 @@ import {colors} from './src/components/_base';
 
 import Home from './src/components/screens/Home';
 import Categories from './src/components/screens/Categories';
+import Category from './src/components/screens/Category';
+import Book from './src/components/screens/Book';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +46,20 @@ function StackNavigator() {
           component={Categories}
           options={{
             title: 'Categories',
+          }}
+        />
+        <Stack.Screen
+          name="Category"
+          component={Category}
+          options={{
+            title: 'Category',
+          }}
+        />
+        <Stack.Screen
+          name="Book"
+          component={Book}
+          options={{
+            title: 'Book',
           }}
         />
       </Stack.Navigator>

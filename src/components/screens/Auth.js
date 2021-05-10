@@ -1,15 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from '../_base';
-import Category from '../Category';
+import Auth from '../Auth';
 
-const CategoryScreen = ({route, navigation}) => {
+const AuthScreen = () => {
   return (
     <View style={styles.container}>
-      <Category
-        id={route.params.id}
-        onSelect={id => navigation.navigate('Book', {id})}
-      />
+      <Auth />
     </View>
   );
 };
@@ -21,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoryScreen;
+export default AuthScreen;

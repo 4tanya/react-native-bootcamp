@@ -1,16 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {colors} from '../_base';
-import Categories from '../Categories';
+import BookList from '../BookList';
 
-const CategoriesScreen = ({navigation}) => {
+const BookListScreen = () => {
   return (
     <View style={styles.container}>
-      <Categories
-        onSelect={id => {
-          navigation.navigate('Category', {id});
-        }}
-      />
+      <BookList />
     </View>
   );
 };
@@ -22,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoriesScreen;
+export default BookListScreen;

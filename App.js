@@ -17,7 +17,7 @@ import {colors} from './src/components/_base';
 import Auth from './src/components/screens/Auth';
 import Badge from './src/components/screens/Badge';
 
-import Categories from './src/components/screens/Categories';
+import BookList from './src/components/screens/BookList';
 import Category from './src/components/screens/Category';
 import Book from './src/components/screens/Book';
 
@@ -75,14 +75,14 @@ export default function StackNavigator() {
               name="Badge"
               component={Badge}
               options={{
-                title: 'Badge',
+                title: 'My badge ID',
               }}
             />
             <Drawer.Screen
-              name="Categories"
-              component={Categories}
+              name="BookList"
+              component={BookList}
               options={{
-                title: 'Categories',
+                title: 'Book history',
               }}
             />
             <Drawer.Screen

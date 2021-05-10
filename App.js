@@ -10,6 +10,7 @@ import 'react-native-gesture-handler';
 import React, {createContext, useContext, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import {colors} from './src/components/_base';
 
@@ -21,6 +22,7 @@ import Category from './src/components/screens/Category';
 import Book from './src/components/screens/Book';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export const UserContext = createContext({
   userId: null,
@@ -36,21 +38,23 @@ export default function StackNavigator() {
 
   const value = {userId, setUserId, token, setToken};
 
+  const screenOptions = {
+    headerTintColor: colors.normalText,
+    headerStyle: {
+      height: 80,
+      backgroundColor: colors.primary,
+    },
+    headerTitleStyle: {fontWeight: 'bold'},
+  };
+
   return (
     <UserContext.Provider value={value}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName={!token ? 'Auth' : 'Badge'}
-          headerMode="screen"
-          screenOptions={{
-            headerTintColor: colors.normalText,
-            headerStyle: {
-              height: 80,
-              backgroundColor: colors.primary,
-            },
-            headerTitleStyle: {fontWeight: 'bold'},
-          }}>
-          {!token ? (
+        {!token ? (
+          <Stack.Navigator
+            initialRouteName={'Auth'}
+            headerMode="screen"
+            screenOptions={screenOptions}>
             <Stack.Screen
               name="Auth"
               component={Auth}
@@ -58,39 +62,45 @@ export default function StackNavigator() {
                 title: 'Auth',
               }}
             />
-          ) : (
-            <>
-              <Stack.Screen
-                name="Badge"
-                component={Badge}
-                options={{
-                  title: 'Badge',
-                }}
-              />
-              <Stack.Screen
-                name="Categories"
-                component={Categories}
-                options={{
-                  title: 'Categories',
-                }}
-              />
-              <Stack.Screen
-                name="Category"
-                component={Category}
-                options={{
-                  title: 'Category',
-                }}
-              />
-              <Stack.Screen
-                name="Book"
-                component={Book}
-                options={{
-                  title: 'Book',
-                }}
-              />
-            </>
-          )}
-        </Stack.Navigator>
+          </Stack.Navigator>
+        ) : (
+          <Drawer.Navigator
+            initialRouteName={'Badge'}
+            headerMode="screen"
+            screenOptions={{
+              ...screenOptions,
+              headerShown: true,
+            }}>
+            <Drawer.Screen
+              name="Badge"
+              component={Badge}
+              options={{
+                title: 'Badge',
+              }}
+            />
+            <Drawer.Screen
+              name="Categories"
+              component={Categories}
+              options={{
+                title: 'Categories',
+              }}
+            />
+            <Drawer.Screen
+              name="Category"
+              component={Category}
+              options={{
+                title: 'Category',
+              }}
+            />
+            <Drawer.Screen
+              name="Book"
+              component={Book}
+              options={{
+                title: 'Book',
+              }}
+            />
+          </Drawer.Navigator>
+        )}
       </NavigationContainer>
     </UserContext.Provider>
   );

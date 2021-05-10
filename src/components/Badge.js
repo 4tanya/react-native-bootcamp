@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+import QRCode from 'react-native-qrcode-svg';
+
 import {paddings, fonts} from './_base';
 
 const Badge = ({user: {firstName, lastName, dateOfBirth, memberId}}) => {
@@ -16,6 +18,7 @@ const Badge = ({user: {firstName, lastName, dateOfBirth, memberId}}) => {
       <Text>
         memberId: <Text style={styles.textValue}>{memberId}</Text>
       </Text>
+      <QRCode value="https://globant.com" />
     </View>
   );
 };

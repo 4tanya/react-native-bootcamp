@@ -15,11 +15,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {colors} from './src/components/_base';
 
 import Auth from './src/components/screens/Auth';
-import Badge from './src/components/screens/Badge';
 
+import Badge from './src/components/screens/Badge';
 import BookList from './src/components/screens/BookList';
-import Category from './src/components/screens/Category';
-import Book from './src/components/screens/Book';
+import LibrariesList from './src/components/screens/LibrariesList';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -86,17 +85,10 @@ export default function StackNavigator() {
               }}
             />
             <Drawer.Screen
-              name="Category"
-              component={Category}
+              name="LibrariesList"
+              component={LibrariesList}
               options={{
-                title: 'Category',
-              }}
-            />
-            <Drawer.Screen
-              name="Book"
-              component={Book}
-              options={{
-                title: 'Book',
+                title: 'Look for libraries',
               }}
             />
           </Drawer.Navigator>

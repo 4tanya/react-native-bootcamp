@@ -37,32 +37,31 @@ const BookList = () => {
       <Loader loading={loading} />
       <FlatList
         data={data}
-        keyExtractor={item => item.id}
+        keyExtractor={({isbn}) => isbn}
         renderItem={({
-          item: {name, author, takenDate, returnedDate, returnBefore, isbn},
+          item: {name, author, takenDate, returnedDate, returnBefore},
         }) => (
           <TouchableHighlight
             style={styles.listItem}
-            underlayColor={colors.primary}
-            key={isbn}>
+            underlayColor={colors.primary}>
             <View>
-              <Text key={name}>
+              <Text>
                 name: <Text style={styles.textValue}>{name}</Text>
               </Text>
-              <Text key={author}>
+              <Text>
                 author: <Text style={styles.textValue}>{author}</Text>
               </Text>
-              <Text key={takenDate}>
+              <Text>
                 borrow date : <Text style={styles.textValue}>{takenDate}</Text>
               </Text>
               {returnedDate && (
-                <Text key={returnedDate}>
+                <Text>
                   Returned date:{' '}
                   <Text style={styles.textValue}>{returnedDate}</Text>
                 </Text>
               )}
               {!returnedDate && (
-                <Text key={returnBefore}>
+                <Text>
                   Return date:{' '}
                   <Text style={styles.textValue}>{returnBefore}</Text>
                 </Text>

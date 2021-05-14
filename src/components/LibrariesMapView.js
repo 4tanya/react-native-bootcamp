@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet, Dimensions, PixelRatio, Platform} from 'react-native';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import Loader from './common/Loader';
 
 const windowWidth = Dimensions.get('window').width;
@@ -28,9 +28,9 @@ const LibrariesMapView = ({data, loading, location}) => {
         <MapView
           ref={mapRef}
           style={styles.map}
-          provider={PROVIDER_GOOGLE}
           showsUserLocation={true}
           isAccessibilityElement={true}
+          mapPadding={edgePadding}
           onMapReady={() =>
             mapRef.current.fitToSuppliedMarkers(
               data.map(({id}) => id.toString()),

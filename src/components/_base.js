@@ -1,9 +1,9 @@
 export const colors = {
-  primary: 'yellow',
-  secondary: '#180a32',
-  normalText: '#333',
-  background: '#fff',
-  secondaryBackground: '#ccc',
+  primary: '#ffcb1e',
+  secondary: '#da3358',
+  normalText: '#552800',
+  background: '#ffdd6d',
+  secondaryBackground: '#F8F4E7',
 };
 
 export const paddings = {

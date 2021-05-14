@@ -27,5 +27,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <!-- react-native-maps configuration tags -->
+      <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyA1SpfS77Ss7xcuBkKuyuA9TJSHHKaS9Gc"/>
+      <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 </manifest>

@@ -33,7 +33,7 @@ const BookList = () => {
   }, []);
 
   return (
-    <View style={styles.listContainer}>
+    <View>
       <Loader loading={loading} />
       <FlatList
         data={data}
@@ -75,9 +75,6 @@ const BookList = () => {
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    paddingTop: paddings.lg,
-  },
   listItem: {
     flex: 1,
     padding: paddings.md,

@@ -1,16 +1,38 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, Alert} from 'react-native';
+import {Alert, useWindowDimensions} from 'react-native';
+import {TabView} from 'react-native-tab-view';
 import GetLocation from 'react-native-get-location';
 import {UserContext} from '../../App';
 import LibrariesListView from './LibrariesListView';
 import LibrariesMapView from './LibrariesMapView';
 
 const LibrariesList = () => {
+  const layout = useWindowDimensions();
+
   const {token} = useContext(UserContext);
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState();
+
+  /** tabs */
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'list', title: 'List view'},
+    {key: 'map', title: 'Map view'},
+  ]);
+
+  const renderScene = ({route: {key}}) => {
+    switch (key) {
+      case 'list':
+        return <LibrariesListView data={data} loading={loading} />;
+      case 'map':
+        return (
+          <LibrariesMapView data={data} loading={loading} location={location} />
+        );
+    }
+  };
+  /** tabs */
 
   const getLocation = () => {
     GetLocation.getCurrentPosition({
@@ -55,10 +77,12 @@ const LibrariesList = () => {
   }, [location]);
 
   return (
-    <View>
-      <LibrariesListView data={data} loading={loading} />
-      <LibrariesMapView data={data} loading={loading} location={location} />
-    </View>
+    <TabView
+      navigationState={{index, routes}}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{width: layout.width}}
+    />
   );
 };
 

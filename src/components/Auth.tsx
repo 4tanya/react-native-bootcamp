@@ -3,7 +3,7 @@ import {View, Button, Alert, TextInput, StyleSheet} from 'react-native';
 import {UserContext} from '../../App';
 import {paddings} from './_base';
 
-const Auth = props => {
+const Auth = () => {
   const {setUserId, setToken} = useContext(UserContext);
 
   const [memberId, setMemberId] = useState(null);

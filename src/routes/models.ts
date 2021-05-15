@@ -1,3 +1,5 @@
+import {FC} from 'react';
+
 enum RoutesName {
   AUTH = 'Auth',
   BADGE = 'Badge',
@@ -12,4 +14,16 @@ enum RoutesTitle {
   LIBRARIES_LIST = 'Look for libraries',
 }
 
+interface Route {
+  name: RoutesName;
+  component: FC;
+  title: RoutesTitle;
+}
+
+interface RoutesConfig {
+  loggingRoutes: Route[];
+  landingRoutes: Route[];
+}
+
 export {RoutesName, RoutesTitle};
+export type {Route, RoutesConfig};

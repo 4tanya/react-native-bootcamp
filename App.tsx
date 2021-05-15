@@ -6,14 +6,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {screenOptions, drawerOptions} from './AppStyles';
 
 import {UserContext} from './src/context';
-
-import Auth from './src/Auth';
-
-import Badge from './src/Badge';
-import BookList from './src/BookList';
-import LibrariesList from './src/LibrariesList';
-
-import {RoutesName, RoutesTitle} from './AppModels';
+import routesConfig, {RoutesName} from './src/routes';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -33,39 +26,31 @@ export default function App() {
             initialRouteName={RoutesName.AUTH}
             headerMode="screen"
             screenOptions={screenOptions}>
-            <Stack.Screen
-              name={RoutesName.AUTH}
-              component={Auth}
-              options={{
-                title: RoutesTitle.AUTH,
-              }}
-            />
+            {routesConfig.loggingRoutes.map(({name, component, title}) => (
+              <Stack.Screen
+                key={name}
+                name={name}
+                component={component}
+                options={{
+                  title: title,
+                }}
+              />
+            ))}
           </Stack.Navigator>
         ) : (
           <Drawer.Navigator
             initialRouteName={RoutesName.BADGE}
             screenOptions={drawerOptions}>
-            <Drawer.Screen
-              name={RoutesName.BADGE}
-              component={Badge}
-              options={{
-                title: RoutesTitle.BADGE,
-              }}
-            />
-            <Drawer.Screen
-              name={RoutesName.BOOK_LIST}
-              component={BookList}
-              options={{
-                title: RoutesTitle.BOOK_LIST,
-              }}
-            />
-            <Drawer.Screen
-              name={RoutesName.LIBRARIES_LIST}
-              component={LibrariesList}
-              options={{
-                title: RoutesTitle.LIBRARIES_LIST,
-              }}
-            />
+            {routesConfig.landingRoutes.map(({name, component, title}) => (
+              <Drawer.Screen
+                key={name}
+                name={name}
+                component={component}
+                options={{
+                  title: title,
+                }}
+              />
+            ))}
           </Drawer.Navigator>
         )}
       </NavigationContainer>

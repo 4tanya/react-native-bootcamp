@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {colors} from '../_base';
-import BookList from '../BookList';
+import {colors} from '../styles/_base';
+import AuthComponent from './AuthComponent';
 
-const BookListScreen = () => {
+const AuthScreen = () => {
   return (
     <View style={styles.container}>
-      <BookList />
+      <AuthComponent />
     </View>
   );
 };
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookListScreen;
+export default AuthScreen;

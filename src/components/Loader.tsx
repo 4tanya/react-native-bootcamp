@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import {colors, paddings} from '../_base';
+import {colors, paddings} from '../styles/_base';
 
 const Loader = ({loading}) => {
   return (

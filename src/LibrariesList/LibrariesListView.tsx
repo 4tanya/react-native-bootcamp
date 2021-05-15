@@ -6,8 +6,8 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native';
-import {colors, paddings} from './_base';
-import Loader from './common/Loader';
+import {colors, paddings} from '../styles/_base';
+import Loader from '../components/Loader';
 
 const LibrariesListView = ({data, loading}) => (
   <View>

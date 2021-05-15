@@ -6,7 +6,7 @@ import {UserContext} from '../../App';
 import LibrariesListView from './LibrariesListView';
 import LibrariesMapView from './LibrariesMapView';
 
-const LibrariesList = () => {
+const LibrariesListComponent = () => {
   const layout = useWindowDimensions();
 
   const {token} = useContext(UserContext);
@@ -86,4 +86,4 @@ const LibrariesList = () => {
   );
 };
 
-export default LibrariesList;
+export default LibrariesListComponent;

@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {View, StyleSheet, Dimensions, PixelRatio, Platform} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import Loader from './common/Loader';
+import Loader from '../components/Loader';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

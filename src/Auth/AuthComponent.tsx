@@ -1,9 +1,9 @@
 import React, {useContext, useState} from 'react';
 import {View, Button, Alert, TextInput, StyleSheet} from 'react-native';
 import {UserContext} from '../../App';
-import {paddings} from './_base';
+import {paddings} from '../styles/_base';
 
-const Auth = () => {
+const AuthComponent = () => {
   const {setUserId, setToken} = useContext(UserContext);
 
   const [memberId, setMemberId] = useState(null);
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Auth;
+export default AuthComponent;

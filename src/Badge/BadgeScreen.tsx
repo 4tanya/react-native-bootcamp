@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {StyleSheet, View, Alert} from 'react-native';
-import {colors} from '../_base';
-import Badge from '../Badge';
-import Loader from '../common/Loader';
-import {UserContext} from '../../../App';
+import {colors} from '../styles/_base';
+import BadgeComponent from './BadgeComponent';
+import Loader from '../components/Loader';
+import {UserContext} from '../../App';
 
 const BadgeScreen = () => {
   const {userId, token} = useContext(UserContext);
@@ -36,7 +36,7 @@ const BadgeScreen = () => {
     <Loader loading={loading} />
   ) : (
     <View style={styles.container}>
-      <Badge user={user} />
+      <BadgeComponent user={user} />
     </View>
   );
 };

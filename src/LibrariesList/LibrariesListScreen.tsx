@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {colors} from '../_base';
-import LibrariesList from '../LibrariesList';
+import {colors} from '../styles/_base';
+import LibrariesListComponent from './LibrariesListComponent';
 
 const LibrariesListScreen = () => {
   return (
     <View style={styles.container}>
-      <LibrariesList />
+      <LibrariesListComponent />
     </View>
   );
 };

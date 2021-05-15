@@ -7,11 +7,11 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-import {colors, paddings} from './_base';
-import Loader from './common/Loader';
+import {colors, paddings} from '../styles/_base';
+import Loader from '../components/Loader';
 import {UserContext} from '../../App';
 
-const BookList = () => {
+const BookListComponent = () => {
   const {userId, token} = useContext(UserContext);
 
   const [data, setData] = useState([]);
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BookList;
+export default BookListComponent;

@@ -3,9 +3,9 @@ import {View, Text, StyleSheet} from 'react-native';
 
 import QRCode from 'react-native-qrcode-svg';
 
-import {paddings, fonts} from './_base';
+import {paddings, fonts} from '../styles/_base';
 
-const Badge = ({user: {firstName, lastName, dateOfBirth, memberId}}) => {
+const BadgeComponent = ({user: {firstName, lastName, dateOfBirth, memberId}}) => {
   return (
     <View style={styles.container}>
       <Text>
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Badge;
+export default BadgeComponent;

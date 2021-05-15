@@ -3,10 +3,13 @@ import React, {useContext, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+
 import {screenOptions, drawerOptions} from './AppStyles';
 
 import {UserContext} from './src/context';
 import routesConfig, {RoutesName} from './src/routes';
+
+import {DrawerContent} from './src/components';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -17,6 +20,11 @@ export default function App() {
   const [token, setToken] = useState<string>(userContext.token);
 
   const value = {userId, setUserId, token, setToken};
+
+  const signOut = () => {
+    setUserId('');
+    setToken('');
+  };
 
   return (
     <UserContext.Provider value={value}>
@@ -40,7 +48,8 @@ export default function App() {
         ) : (
           <Drawer.Navigator
             initialRouteName={RoutesName.BADGE}
-            screenOptions={drawerOptions}>
+            screenOptions={drawerOptions}
+            drawerContent={props => <DrawerContent {...{signOut, ...props}} />}>
             {routesConfig.appRoutes.map(({name, component, title}) => (
               <Drawer.Screen
                 key={name}

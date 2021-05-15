@@ -14,8 +14,8 @@ export default class BookListService extends BaseService {
   }: {
     userId: string;
     token: string;
-  }): Promise<BookListProps> => {
+  }): Promise<BookListProps | undefined> => {
     const endpoint = getEndpoint(userId);
-    return this.request<BookListProps>({endpoint, token});
+    return this.request<BookListProps | undefined>({endpoint, token});
   };
 }

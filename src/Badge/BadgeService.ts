@@ -14,8 +14,8 @@ export default class BadgeService extends BaseService {
   }: {
     userId: string;
     token: string;
-  }): Promise<BadgeProps> => {
+  }): Promise<BadgeProps | undefined> => {
     const endpoint = getEndpoint(userId);
-    return this.request<BadgeProps>({endpoint, token});
+    return this.request<BadgeProps | undefined>({endpoint, token});
   };
 }

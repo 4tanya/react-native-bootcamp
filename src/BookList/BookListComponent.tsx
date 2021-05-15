@@ -3,7 +3,7 @@ import {View, Text, FlatList, TouchableHighlight} from 'react-native';
 import {colors} from '../styles/_base';
 import {Loader} from '../components';
 import {UserContext} from '../context';
-import {Book} from './BookListProps';
+import BookListProps, {Book} from './BookListProps';
 import styles from './styles';
 import BookListService from './BookListService';
 
@@ -15,13 +15,18 @@ const BookListComponent: FC = () => {
 
   const service = new BookListService();
 
-  useEffect(() => {
-    setLoading(true);
+  const loadData = async () => {
+    try {
+      const {books} = (await service.get({userId, token})) as BookListProps;
+      setData(books);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  };
 
-    service
-      .get({userId, token})
-      .then(({books}) => setData(books))
-      .finally(() => setLoading(false));
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (

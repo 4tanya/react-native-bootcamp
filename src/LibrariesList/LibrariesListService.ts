@@ -16,8 +16,8 @@ export default class LibrariesListService extends BaseService {
   }: {
     location: Location;
     token: string;
-  }): Promise<LibrariesData> => {
+  }): Promise<LibrariesData | undefined> => {
     const endpoint = getEndpoint(location);
-    return this.request<LibrariesData>({endpoint, token});
+    return this.request<LibrariesData | undefined>({endpoint, token});
   };
 }

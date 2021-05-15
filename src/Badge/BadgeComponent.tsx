@@ -9,24 +9,23 @@ import BadgeService from './BadgeService';
 
 const BadgeComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
-  const [loading, setLoading] = useState<boolean>();
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<BadgeProps>();
 
   const service = new BadgeService();
 
-  const getData = () => {
-    setLoading(true);
-
-    service
-      .get({userId, token})
-      .then(data => setUser(data))
-      .finally(() => {
-        setLoading(false);
-      });
+  const loadData = async () => {
+    try {
+      const data = (await service.get({userId, token})) as BadgeProps;
+      setUser(data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getData();
+    loadData();
   }, []);
 
   return loading ? (

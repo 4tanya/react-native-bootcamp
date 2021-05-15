@@ -3,7 +3,7 @@ import {View, Button, TextInput} from 'react-native';
 import {UserContext} from '../context';
 import styles from './styles';
 import AuthService from './AuthService';
-import {UserBody} from './models';
+import {UserBody, UserData} from './models';
 
 const AuthComponent: FC = () => {
   const {setUserId, setToken} = useContext(UserContext);
@@ -19,15 +19,15 @@ const AuthComponent: FC = () => {
       password,
     };
 
-    service
-      .post({
+    try {
+      const {userId, token} = (await service.post({
         body: JSON.stringify(body),
         errorText: 'Username or password are not valid',
-      })
-      .then(({userId, token}) => {
-        setUserId(userId);
-        setToken(token);
-      });
+      })) as UserData;
+
+      setUserId(userId);
+      setToken(token);
+    } catch (err) {}
   };
 
   return (

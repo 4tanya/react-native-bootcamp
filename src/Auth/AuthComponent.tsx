@@ -1,5 +1,5 @@
-import React, {useContext, FC} from 'react';
-import {View, Button, TextInput, Text} from 'react-native';
+import React, {useContext, FC, useState} from 'react';
+import {View, Button, TextInput, Text, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {UserContext} from '../context';
 import styles from './styles';
@@ -18,7 +18,9 @@ const AuthComponent: FC = () => {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm();
+  } = useForm<UserValues>();
+
+  const [passHidden, setPassHidden] = useState<boolean>(true);
 
   const service = new AuthService();
 
@@ -59,13 +61,18 @@ const AuthComponent: FC = () => {
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
-          <TextInput
-            style={styles.input}
-            onChangeText={onChange}
-            value={value}
-            secureTextEntry={true}
-            placeholder={FormFieldsPlaceholder.PASSWORD}
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.iconInput}
+              onChangeText={onChange}
+              value={value}
+              secureTextEntry={passHidden}
+              placeholder={FormFieldsPlaceholder.PASSWORD}
+            />
+            <TouchableOpacity onPress={() => setPassHidden(!passHidden)}>
+              <Text>Go</Text>
+            </TouchableOpacity>
+          </View>
         )}
         name={FormFieldsName.PASSWORD}
         rules={{required: true}}

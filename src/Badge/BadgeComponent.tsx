@@ -38,17 +38,17 @@ const BadgeComponent: FC = () => {
   ) : (
     <View style={styles.container}>
       <Text>
-        fullName:{' '}
+        Full Name:{' '}
         <Text
           style={
             styles.textValue
           }>{`${user?.firstName} ${user?.lastName}`}</Text>
       </Text>
       <Text>
-        dateOfBirth: <Text style={styles.textValue}>{user?.dateOfBirth}</Text>
+        Date Of Birth: <Text style={styles.textValue}>{user?.dateOfBirth}</Text>
       </Text>
       <Text>
-        memberId: <Text style={styles.textValue}>{user?.memberId}</Text>
+        Member Id: <Text style={styles.textValue}>{user?.memberId}</Text>
       </Text>
       <QRCode value="https://globant.com" />
     </View>

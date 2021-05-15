@@ -7,14 +7,14 @@ import BookList from '../BookList';
 import LibrariesList from '../LibrariesList';
 
 const routesConfig: RoutesConfig = {
-  loggingRoutes: [
+  landingRoutes: [
     {
       name: RoutesName.AUTH,
       component: Auth,
       title: RoutesTitle.AUTH,
     },
   ],
-  landingRoutes: [
+  appRoutes: [
     {
       name: RoutesName.BADGE,
       component: Badge,

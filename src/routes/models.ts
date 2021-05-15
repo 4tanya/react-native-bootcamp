@@ -21,8 +21,8 @@ interface Route {
 }
 
 interface RoutesConfig {
-  loggingRoutes: Route[];
   landingRoutes: Route[];
+  appRoutes: Route[];
 }
 
 export {RoutesName, RoutesTitle};

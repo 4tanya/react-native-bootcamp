@@ -26,7 +26,7 @@ export default function App() {
             initialRouteName={RoutesName.AUTH}
             headerMode="screen"
             screenOptions={screenOptions}>
-            {routesConfig.loggingRoutes.map(({name, component, title}) => (
+            {routesConfig.landingRoutes.map(({name, component, title}) => (
               <Stack.Screen
                 key={name}
                 name={name}
@@ -41,7 +41,7 @@ export default function App() {
           <Drawer.Navigator
             initialRouteName={RoutesName.BADGE}
             screenOptions={drawerOptions}>
-            {routesConfig.landingRoutes.map(({name, component, title}) => (
+            {routesConfig.appRoutes.map(({name, component, title}) => (
               <Drawer.Screen
                 key={name}
                 name={name}

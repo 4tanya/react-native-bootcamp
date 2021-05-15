@@ -41,13 +41,13 @@ const BookListComponent: FC = () => {
             underlayColor={colors.primary}>
             <View>
               <Text>
-                name: <Text style={styles.textValue}>{name}</Text>
+                Name of the book: <Text style={styles.textValue}>{name}</Text>
               </Text>
               <Text>
-                author: <Text style={styles.textValue}>{author}</Text>
+                Author: <Text style={styles.textValue}>{author}</Text>
               </Text>
               <Text>
-                borrow date : <Text style={styles.textValue}>{takenDate}</Text>
+                Borrow date : <Text style={styles.textValue}>{takenDate}</Text>
               </Text>
               {returnedDate && (
                 <Text>

@@ -7,6 +7,7 @@ import LibrariesListView from './LibrariesListView';
 import LibrariesMapView from './LibrariesMapView';
 import type {LibrariesList, RouteTab} from './models';
 import {RoutesKey, RoutesTitle} from './models';
+import LibrariesListService from './LibrariesListService';
 
 const LibrariesListComponent: FC = () => {
   const layout = useWindowDimensions();
@@ -16,6 +17,8 @@ const LibrariesListComponent: FC = () => {
   const [data, setData] = useState<LibrariesList>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [location, setLocation] = useState<Location>();
+
+  const service = new LibrariesListService();
 
   /** tabs */
   const [index, setIndex] = useState(0);
@@ -49,24 +52,10 @@ const LibrariesListComponent: FC = () => {
   };
 
   const loadItems = () => {
-    if (!location) return;
-
-    const {latitude: lat, longitude: lon} = location;
-
     setLoading(true);
-    fetch(
-      `https://rn-bootcamp2021.mocklab.io/v1/libraries?latitude=${lat}&longitude=${lon}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
-      .then(resp => resp.json())
+    service
+      .get({location, token})
       .then(({libraries}) => setData(libraries))
-      .catch(err => {
-        Alert.alert('oh snap!', err);
-      })
       .finally(() => setLoading(false));
   };
 
@@ -75,7 +64,7 @@ const LibrariesListComponent: FC = () => {
   }, []);
 
   useEffect(() => {
-    loadItems();
+    location && loadItems();
   }, [location]);
 
   return (

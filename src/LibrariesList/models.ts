@@ -13,6 +13,10 @@ interface Library {
 
 type LibrariesList = Library[];
 
+interface LibrariesData {
+  libraries: LibrariesList;
+}
+
 interface ListViewProps {
   data: LibrariesList;
   loading: boolean;
@@ -37,5 +41,5 @@ export interface RouteTab {
   title: RoutesTitle;
 }
 
-export type {LibrariesList, RouteTab, Library, ListViewProps, MapViewProps};
+export type {LibrariesList, RouteTab, Library, ListViewProps, MapViewProps, LibrariesData};
 export {RoutesKey, RoutesTitle};

@@ -1,4 +1,4 @@
-interface Book {
+export interface Book {
   isbn: string;
   name: string;
   author: string;
@@ -7,4 +7,6 @@ interface Book {
   returnBefore: string;
 }
 
-export type BookListProps = Array<Book>;
+export default interface BookListProps {
+  books: Array<Book>;
+}

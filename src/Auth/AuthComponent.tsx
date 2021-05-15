@@ -1,7 +1,9 @@
 import React, {useContext, useState, FC} from 'react';
-import {View, Button, Alert, TextInput} from 'react-native';
+import {View, Button, TextInput} from 'react-native';
 import {UserContext} from '../context';
 import styles from './styles';
+import AuthService from './AuthService';
+import {UserBody} from './models';
 
 const AuthComponent: FC = () => {
   const {setUserId, setToken} = useContext(UserContext);
@@ -9,34 +11,23 @@ const AuthComponent: FC = () => {
   const [memberId, setMemberId] = useState<string>();
   const [password, setPassword] = useState<string>();
 
+  const service = new AuthService();
+
   const signIn = async () => {
-    try {
-      const rawResponse = await fetch(
-        'https://rn-bootcamp2021.mocklab.io/v1/login',
-        {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            memberId,
-            password,
-          }),
-        },
-      );
+    const body: UserBody = {
+      memberId,
+      password,
+    };
 
-      if (!rawResponse.ok) {
-        throw new Error();
-      }
-
-      const {userId, token} = await rawResponse.json();
-
-      setUserId(userId);
-      setToken(token);
-    } catch (err) {
-      Alert.alert('oh snap!', 'Username or password are not valid');
-    }
+    service
+      .post({
+        body: JSON.stringify(body),
+        errorText: 'Username or password are not valid',
+      })
+      .then(({userId, token}) => {
+        setUserId(userId);
+        setToken(token);
+      });
   };
 
   return (

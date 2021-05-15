@@ -1,29 +1,26 @@
 import React, {useState, useEffect, useContext, FC} from 'react';
-import {View, Text, FlatList, TouchableHighlight, Alert} from 'react-native';
+import {View, Text, FlatList, TouchableHighlight} from 'react-native';
 import {colors} from '../styles/_base';
 import {Loader} from '../components';
 import {UserContext} from '../context';
-import type {BookListProps} from './BookListProps';
+import {Book} from './BookListProps';
 import styles from './styles';
+import BookListService from './BookListService';
 
 const BookListComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
 
-  const [data, setData] = useState<BookListProps>([]);
+  const [data, setData] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const service = new BookListService();
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://rn-bootcamp2021.mocklab.io/v1/members/${userId}/books`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(resp => resp.json())
+
+    service
+      .get({userId, token})
       .then(({books}) => setData(books))
-      .catch(err => {
-        Alert.alert('oh snap!', err);
-      })
       .finally(() => setLoading(false));
   }, []);
 

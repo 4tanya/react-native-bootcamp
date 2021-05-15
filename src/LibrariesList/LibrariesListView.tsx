@@ -1,14 +1,9 @@
 import React, {FC} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableHighlight,
-  StyleSheet,
-} from 'react-native';
-import {colors, paddings} from '../styles/_base';
+import {View, Text, FlatList, TouchableHighlight} from 'react-native';
+import {colors} from '../styles/_base';
 import {Loader} from '../components';
 import {ListViewProps} from './models';
+import styles from './styles';
 
 const LibrariesListView: FC<ListViewProps> = ({data, loading}) => (
   <View>
@@ -42,16 +37,5 @@ const LibrariesListView: FC<ListViewProps> = ({data, loading}) => (
     />
   </View>
 );
-
-const styles = StyleSheet.create({
-  listItem: {
-    flex: 1,
-    padding: paddings.md,
-    backgroundColor: colors.background,
-  },
-  textValue: {
-    fontSize: 30,
-  },
-});
 
 export default LibrariesListView;

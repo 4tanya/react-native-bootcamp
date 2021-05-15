@@ -4,6 +4,8 @@ export const colors = {
   normalText: '#552800',
   background: '#ffdd6d',
   secondaryBackground: '#F8F4E7',
+
+  danger: 'red',
 };
 
 export const paddings = {

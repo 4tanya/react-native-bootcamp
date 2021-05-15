@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {paddings} from '../styles/_base';
+import {paddings, colors} from '../styles/_base';
 
 export default StyleSheet.create({
   input: {
@@ -7,5 +7,10 @@ export default StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: paddings.sm,
+  },
+  error: {
+    paddingLeft: paddings.md,
+    paddingBottom: paddings.md,
+    color: colors.danger,
   },
 });

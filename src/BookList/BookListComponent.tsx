@@ -1,11 +1,15 @@
 import React, {useState, useEffect, useContext, FC} from 'react';
-import {View, Text, FlatList, TouchableHighlight} from 'react-native';
-import {colors} from '../styles/_base';
+import {View, Text, SectionList} from 'react-native';
 import {Loader} from '../components';
 import {UserContext} from '../context';
-import BookListProps, {Book} from './BookListProps';
+import BookListProps, {
+  Book,
+  FilteredBookItem,
+  BookStatusTitle,
+} from './BookListProps';
 import styles from './styles';
 import BookListService from './BookListService';
+import BookListItem from './BookListItem';
 
 const BookListComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
@@ -29,42 +33,33 @@ const BookListComponent: FC = () => {
     loadData();
   }, []);
 
+  const filterBooks = (books: Book[]): FilteredBookItem[] => {
+    return books.reduce(
+      (res, book) => {
+        if (book.returnedDate) {
+          res[1].data = [...res[1].data, book];
+        } else {
+          res[0].data = [...res[0].data, book];
+        }
+
+        return res;
+      },
+      [
+        {title: BookStatusTitle.NOT_RETURNED, data: [] as Book[]},
+        {title: BookStatusTitle.RETURNED, data: [] as Book[]},
+      ],
+    );
+  };
+
   return (
     <View>
       <Loader loading={loading} />
-      <FlatList
-        data={data}
+      <SectionList
+        sections={filterBooks(data)}
         keyExtractor={({isbn}) => isbn}
-        renderItem={({
-          item: {name, author, takenDate, returnedDate, returnBefore},
-        }) => (
-          <TouchableHighlight
-            style={styles.listItem}
-            underlayColor={colors.primary}>
-            <View>
-              <Text>
-                Name of the book: <Text style={styles.textValue}>{name}</Text>
-              </Text>
-              <Text>
-                Author: <Text style={styles.textValue}>{author}</Text>
-              </Text>
-              <Text>
-                Borrow date : <Text style={styles.textValue}>{takenDate}</Text>
-              </Text>
-              {returnedDate && (
-                <Text>
-                  Returned date:{' '}
-                  <Text style={styles.textValue}>{returnedDate}</Text>
-                </Text>
-              )}
-              {!returnedDate && (
-                <Text>
-                  Return date:{' '}
-                  <Text style={styles.textValue}>{returnBefore}</Text>
-                </Text>
-              )}
-            </View>
-          </TouchableHighlight>
+        renderItem={({item}) => <BookListItem item={item} />}
+        renderSectionHeader={({section: {title}}) => (
+          <Text style={styles.textValue}>{title}</Text>
         )}
       />
     </View>

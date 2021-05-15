@@ -1,32 +1,34 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, FC} from 'react';
 import {Alert, useWindowDimensions} from 'react-native';
 import {TabView} from 'react-native-tab-view';
-import GetLocation from 'react-native-get-location';
-import {UserContext} from '../../App';
+import GetLocation, {Location} from 'react-native-get-location';
+import {UserContext} from '../context';
 import LibrariesListView from './LibrariesListView';
 import LibrariesMapView from './LibrariesMapView';
+import type {LibrariesList, RouteTab} from './models';
+import {RoutesKey, RoutesTitle} from './models';
 
-const LibrariesListComponent = () => {
+const LibrariesListComponent: FC = () => {
   const layout = useWindowDimensions();
 
   const {token} = useContext(UserContext);
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState();
+  const [data, setData] = useState<LibrariesList>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [location, setLocation] = useState<Location>();
 
   /** tabs */
   const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    {key: 'list', title: 'List view'},
-    {key: 'map', title: 'Map view'},
+  const [routes] = useState<RouteTab[]>([
+    {key: RoutesKey.LIST, title: RoutesTitle.LIST},
+    {key: RoutesKey.MAP, title: RoutesTitle.MAP},
   ]);
 
-  const renderScene = ({route: {key}}) => {
+  const renderScene = ({route: {key}}: {route: RouteTab}) => {
     switch (key) {
-      case 'list':
+      case RoutesKey.LIST:
         return <LibrariesListView data={data} loading={loading} />;
-      case 'map':
+      case RoutesKey.MAP:
         return (
           <LibrariesMapView data={data} loading={loading} location={location} />
         );

@@ -1,10 +1,11 @@
 import 'react-native-gesture-handler';
-import React, {createContext, useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {screenOptions, drawerOptions} from './AppStyles';
 
-import {colors} from './src/styles/_base';
+import {UserContext} from './src/context';
 
 import Auth from './src/Auth';
 
@@ -12,75 +13,57 @@ import Badge from './src/Badge';
 import BookList from './src/BookList';
 import LibrariesList from './src/LibrariesList';
 
+import {RoutesName, RoutesTitle} from './AppModels';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-export const UserContext = createContext({
-  userId: null,
-  setUserId: () => {},
-  token: null,
-  setToken: () => {},
-});
-
-export default function StackNavigator() {
+export default function App() {
   const userContext = useContext(UserContext);
-  const [userId, setUserId] = useState(userContext.userId);
-  const [token, setToken] = useState(userContext.token);
+  const [userId, setUserId] = useState<string>(userContext.userId);
+  const [token, setToken] = useState<string>(userContext.token);
 
   const value = {userId, setUserId, token, setToken};
-
-  const screenOptions = {
-    headerTintColor: colors.normalText,
-    headerStyle: {
-      height: 80,
-      backgroundColor: colors.primary,
-    },
-    headerTitleStyle: {fontWeight: 'bold'},
-  };
 
   return (
     <UserContext.Provider value={value}>
       <NavigationContainer>
         {!token ? (
           <Stack.Navigator
-            initialRouteName={'Auth'}
+            initialRouteName={RoutesName.AUTH}
             headerMode="screen"
             screenOptions={screenOptions}>
             <Stack.Screen
-              name="Auth"
+              name={RoutesName.AUTH}
               component={Auth}
               options={{
-                title: 'Auth',
+                title: RoutesTitle.AUTH,
               }}
             />
           </Stack.Navigator>
         ) : (
           <Drawer.Navigator
-            initialRouteName={'Badge'}
-            headerMode="screen"
-            screenOptions={{
-              ...screenOptions,
-              headerShown: true,
-            }}>
+            initialRouteName={RoutesName.BADGE}
+            screenOptions={drawerOptions}>
             <Drawer.Screen
-              name="Badge"
+              name={RoutesName.BADGE}
               component={Badge}
               options={{
-                title: 'My badge ID',
+                title: RoutesTitle.BADGE,
               }}
             />
             <Drawer.Screen
-              name="BookList"
+              name={RoutesName.BOOK_LIST}
               component={BookList}
               options={{
-                title: 'Book history',
+                title: RoutesTitle.BOOK_LIST,
               }}
             />
             <Drawer.Screen
-              name="LibrariesList"
+              name={RoutesName.LIBRARIES_LIST}
               component={LibrariesList}
               options={{
-                title: 'Look for libraries',
+                title: RoutesTitle.LIBRARIES_LIST,
               }}
             />
           </Drawer.Navigator>

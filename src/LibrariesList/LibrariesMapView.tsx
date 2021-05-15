@@ -1,13 +1,14 @@
-import React, {useRef} from 'react';
+import React, {useRef, FC} from 'react';
 import {View, StyleSheet, Dimensions, PixelRatio, Platform} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import Loader from '../components/Loader';
+import {Loader} from '../components';
+import {MapViewProps} from './models';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const LibrariesMapView = ({data, loading, location}) => {
-  const mapRef = useRef(null);
+const LibrariesMapView: FC<MapViewProps> = ({data, loading, location}) => {
+  const mapRef = useRef<{current: typeof MapView}>();
 
   const iosEdgePadding = {top: 50, right: 50, bottom: 50, left: 50};
 

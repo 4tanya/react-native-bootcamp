@@ -1,21 +1,16 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableHighlight,
-  StyleSheet,
-  Alert,
-} from 'react-native';
-import {colors, paddings} from '../styles/_base';
-import Loader from '../components/Loader';
-import {UserContext} from '../../App';
+import React, {useState, useEffect, useContext, FC} from 'react';
+import {View, Text, FlatList, TouchableHighlight, Alert} from 'react-native';
+import {colors} from '../styles/_base';
+import {Loader} from '../components';
+import {UserContext} from '../context';
+import type {BookListProps} from './BookListProps';
+import styles from './styles';
 
-const BookListComponent = () => {
+const BookListComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(null);
+  const [data, setData] = useState<BookListProps>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setLoading(true);
@@ -73,13 +68,5 @@ const BookListComponent = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  listItem: {
-    flex: 1,
-    padding: paddings.md,
-    backgroundColor: colors.background,
-  },
-});
 
 export default BookListComponent;

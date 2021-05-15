@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import {colors, paddings} from '../styles/_base';
-import Loader from '../components/Loader';
+import {Loader} from '../components';
+import {ListViewProps} from './models';
 
-const LibrariesListView = ({data, loading}) => (
+const LibrariesListView: FC<ListViewProps> = ({data, loading}) => (
   <View>
     <FlatList
       data={data}
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: paddings.md,
     backgroundColor: colors.background,
+  },
+  textValue: {
+    fontSize: 30,
   },
 });
 

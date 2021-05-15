@@ -1,13 +1,13 @@
-import React, {useContext, useState} from 'react';
-import {View, Button, Alert, TextInput, StyleSheet} from 'react-native';
-import {UserContext} from '../../App';
-import {paddings} from '../styles/_base';
+import React, {useContext, useState, FC} from 'react';
+import {View, Button, Alert, TextInput} from 'react-native';
+import {UserContext} from '../context';
+import styles from './styles';
 
-const AuthComponent = () => {
+const AuthComponent: FC = () => {
   const {setUserId, setToken} = useContext(UserContext);
 
-  const [memberId, setMemberId] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [memberId, setMemberId] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
   const signIn = async () => {
     try {
@@ -60,14 +60,5 @@ const AuthComponent = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: paddings.sm,
-  },
-});
 
 export default AuthComponent;

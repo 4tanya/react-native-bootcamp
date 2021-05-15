@@ -32,17 +32,23 @@ export default class BaseService {
       });
 
       if (!rawResponse.ok) {
-        throw new Error();
+        this.handleError(rawResponse); 
       }
 
-      const response = await rawResponse.json();
-      return response;
+      return await rawResponse.json();
     } catch (err) {
-      this.handleError(errorText || err);
+      Alert.alert('oh snap!', errorText || err);
     }
   };
 
-  handleError = (message: string) => {
-    Alert.alert('oh snap!', message);
+  handleError = ({status}: Response) => {
+    let message: string = 'Error';
+    if (status >= 500) {
+      message = 'Something went wrong';
+    }
+    if (status >= 400 && status < 500) {
+      message = 'Try again';
+    }
+    throw new Error(message);
   };
 }

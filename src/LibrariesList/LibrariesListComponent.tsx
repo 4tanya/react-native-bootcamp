@@ -54,7 +54,7 @@ const LibrariesListComponent: FC = () => {
   const loadItems = async () => {
     try {
       const {libraries} = (await service.get({
-        location,
+        location: location as Location,
         token,
       })) as LibrariesData;
 

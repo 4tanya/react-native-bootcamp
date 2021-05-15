@@ -23,7 +23,7 @@ interface ListViewProps {
 }
 
 interface MapViewProps extends ListViewProps {
-  location: Location;
+  location: Location | undefined;
 }
 
 enum RoutesKey {

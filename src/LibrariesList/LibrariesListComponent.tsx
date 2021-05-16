@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext, FC} from 'react';
-import {Alert, useWindowDimensions} from 'react-native';
-import {TabView} from 'react-native-tab-view';
+import {Alert, useWindowDimensions, Text} from 'react-native';
+import {TabView, TabBar} from 'react-native-tab-view';
 import GetLocation, {Location} from 'react-native-get-location';
 import {UserContext} from '../context';
 import LibrariesListView from './LibrariesListView';
@@ -8,6 +8,7 @@ import LibrariesMapView from './LibrariesMapView';
 import type {LibrariesList, RouteTab, LibrariesData} from './models';
 import {RoutesKey, RoutesTitle} from './models';
 import LibrariesListService from './LibrariesListService';
+import styles from './styles';
 
 const LibrariesListComponent: FC = () => {
   const layout = useWindowDimensions();
@@ -79,6 +80,23 @@ const LibrariesListComponent: FC = () => {
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{width: layout.width}}
+      renderTabBar={props => (
+        <TabBar
+          {...props}
+          style={styles.tabBar}
+          renderLabel={({route: {key, title}}) => (
+            <Text
+              style={[
+                styles.tabTitle,
+                key === RoutesKey.LIST
+                  ? styles.tabTitleList
+                  : styles.tabTitleMap,
+              ]}>
+              {title}
+            </Text>
+          )}
+        />
+      )}
     />
   );
 };

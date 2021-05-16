@@ -31,6 +31,9 @@ export const colors = {
 
   returnedColor: customColors.yellow,
   notReturnedColor: customColors.pink,
+
+  tabTitleListColor: customColors.pink,
+  tabTitleMapColor: customColors.yellow,
 };
 
 export const paddings = {

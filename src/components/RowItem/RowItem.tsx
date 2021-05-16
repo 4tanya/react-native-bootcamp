@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {View, Text} from 'react-native';
 import styles from './styles';
-import {BadgeRowProps} from './BadgeProps';
+import RowItemProps from './RowItemProps';
 
-const BadgeRow: FC<BadgeRowProps> = ({title, value}) => {
+const RowItem: FC<RowItemProps> = ({title, value}) => {
   return (
     <View style={styles.textRow}>
       <Text style={styles.textKey}>{title}</Text>
@@ -12,4 +12,4 @@ const BadgeRow: FC<BadgeRowProps> = ({title, value}) => {
   );
 };
 
-export default BadgeRow;
+export default RowItem;

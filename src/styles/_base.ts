@@ -28,6 +28,9 @@ export const colors = {
 
   titleColor: customColors.pink,
   valueColor: customColors.yellow,
+
+  returnedColor: customColors.yellow,
+  notReturnedColor: customColors.pink,
 };
 
 export const paddings = {

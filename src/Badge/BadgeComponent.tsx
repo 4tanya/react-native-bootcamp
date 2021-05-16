@@ -2,11 +2,10 @@ import React, {FC, useState, useEffect, useContext} from 'react';
 import {View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import {UserContext} from '../context';
-import {Loader} from '../components';
+import {Loader, BadgeRowItem} from '../components';
 import BadgeProps from './BadgeProps';
 import styles from './styles';
 import BadgeService from './BadgeService';
-import BadgeRow from './BadgeRow';
 
 const BadgeComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
@@ -36,12 +35,12 @@ const BadgeComponent: FC = () => {
       <View style={styles.qrcode}>
         <QRCode value="https://globant.com" size={150} />
       </View>
-      <BadgeRow
+      <BadgeRowItem
         title={'Full Name:'}
         value={`${user?.firstName} ${user?.lastName}`}
       />
-      <BadgeRow title={'Date Of Birth:'} value={user?.dateOfBirth} />
-      <BadgeRow title={'Member Id:'} value={user?.memberId} />
+      <BadgeRowItem title={'Date Of Birth:'} value={user?.dateOfBirth} />
+      <BadgeRowItem title={'Member Id:'} value={user?.memberId} />
     </View>
   );
 };

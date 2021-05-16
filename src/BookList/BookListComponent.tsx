@@ -10,6 +10,7 @@ import BookListProps, {
 import styles from './styles';
 import BookListService from './BookListService';
 import BookListItem from './BookListItem';
+import {colors} from '../styles/_base';
 
 const BookListComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
@@ -59,7 +60,15 @@ const BookListComponent: FC = () => {
         keyExtractor={({isbn}) => isbn}
         renderItem={({item}) => <BookListItem item={item} />}
         renderSectionHeader={({section: {title}}) => (
-          <Text style={styles.textValue}>{title}</Text>
+          <Text
+            style={[
+              styles.textValue,
+              title === BookStatusTitle.RETURNED
+                ? styles.returned
+                : styles.notReturned,
+            ]}>
+            {title}
+          </Text>
         )}
       />
     </View>

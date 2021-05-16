@@ -12,6 +12,9 @@ import {
   FormError,
 } from './models';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+Ionicons.loadFont();
+
 const AuthComponent: FC = () => {
   const {setUserId, setToken} = useContext(UserContext);
   const {
@@ -70,7 +73,10 @@ const AuthComponent: FC = () => {
               placeholder={FormFieldsPlaceholder.PASSWORD}
             />
             <TouchableOpacity onPress={() => setPassHidden(!passHidden)}>
-              <Text>Go</Text>
+              <Ionicons
+                name={passHidden ? 'eye-off-outline' : 'eye-outline'}
+                size={25}
+              />
             </TouchableOpacity>
           </View>
         )}

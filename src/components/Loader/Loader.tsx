@@ -7,7 +7,7 @@ import styles from './styles';
 const Loader: FC<LoaderProps> = ({loading}) =>
   loading ? (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={colors.secondary} />
+      <ActivityIndicator size="large" color={colors.loaderColor} />
     </View>
   ) : null;
 

@@ -1,13 +1,12 @@
 import React, {FC} from 'react';
 import {View, Text, TouchableHighlight} from 'react-native';
-import {colors} from '../styles/_base';
 import {BookItem} from './BookListProps';
 import styles from './styles';
 
 const BookListItem: FC<BookItem> = ({
   item: {name, author, takenDate, returnedDate, returnBefore},
 }) => (
-  <TouchableHighlight style={styles.listItem} underlayColor={colors.primary}>
+  <TouchableHighlight style={styles.listItem}>
     <View>
       <Text>
         Name of the book: <Text style={styles.textValue}>{name}</Text>

@@ -1,5 +1,5 @@
 import React, {useContext, FC, useState} from 'react';
-import {View, Button, TextInput, Text, TouchableOpacity} from 'react-native';
+import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {UserContext} from '../context';
 import styles from './styles';
@@ -40,7 +40,8 @@ const AuthComponent: FC = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <Ionicons name={'book-outline'} size={100} style={styles.logo} />
       <Controller
         control={control}
         render={({field: {onChange, value}}) => (
@@ -72,7 +73,9 @@ const AuthComponent: FC = () => {
               secureTextEntry={passHidden}
               placeholder={FormFieldsPlaceholder.PASSWORD}
             />
-            <TouchableOpacity onPress={() => setPassHidden(!passHidden)}>
+            <TouchableOpacity
+              onPress={() => setPassHidden(!passHidden)}
+              style={styles.icon}>
               <Ionicons
                 name={passHidden ? 'eye-off-outline' : 'eye-outline'}
                 size={25}
@@ -88,10 +91,9 @@ const AuthComponent: FC = () => {
         <Text style={styles.error}>{FormError.PASSWORD}</Text>
       )}
 
-      <Button
-        title={FormFieldsPlaceholder.BUTTON}
-        onPress={handleSubmit(signIn)}
-      />
+      <TouchableOpacity style={styles.button} onPress={handleSubmit(signIn)}>
+        <Text style={styles.button}>{FormFieldsPlaceholder.BUTTON}</Text>
+      </TouchableOpacity>
     </View>
   );
 };

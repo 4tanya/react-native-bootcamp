@@ -2,6 +2,14 @@ import {StyleSheet} from 'react-native';
 import {paddings, colors} from '../styles/_base';
 
 export default StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  logo: {
+    color: colors.logoColor,
+    textAlign: 'center',
+  },
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -14,6 +22,11 @@ export default StyleSheet.create({
     borderWidth: 1,
     padding: paddings.sm,
   },
+  icon: {
+    position: 'absolute',
+    zIndex: 1,
+    right: 10,
+  },
   input: {
     height: 40,
     margin: 12,
@@ -23,6 +36,14 @@ export default StyleSheet.create({
   error: {
     paddingLeft: paddings.md,
     paddingBottom: paddings.md,
-    color: colors.danger,
+    color: colors.errorColor,
+  },
+  button: {
+    backgroundColor: colors.buttonBackground,
+    color: colors.buttonColor,
+    borderColor: colors.buttonBorder,
+
+    alignItems: 'center',
+    fontSize: 20,
   },
 });

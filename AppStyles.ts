@@ -3,10 +3,10 @@ import {DrawerNavigationOptions} from '@react-navigation/drawer';
 import {colors} from './src/styles/_base';
 
 export const screenOptions: StackNavigationOptions = {
-  headerTintColor: colors.normalText,
+  headerTintColor: colors.headerColor,
   headerStyle: {
     height: 80,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.headerBackground,
   },
   headerTitleStyle: {fontWeight: 'bold'},
 };

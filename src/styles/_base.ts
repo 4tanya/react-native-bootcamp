@@ -1,11 +1,30 @@
-export const colors = {
-  primary: '#ffcb1e',
-  secondary: '#da3358',
-  normalText: '#552800',
-  background: '#ffdd6d',
-  secondaryBackground: '#F8F4E7',
+const customColors = {
+  yellow: '#ffb700',
+  pink: '#ff1c37',
+  blue: '#2196f3',
+  orange: '#ff5d05',
+  grey: '#1a1f22',
+  white: '#fff',
+};
 
-  danger: 'red',
+export const colors = {
+  backgroundColor: customColors.white,
+  textColor: customColors.grey,
+
+  shadowColor: customColors.grey,
+
+  loaderColor: customColors.pink,
+
+  headerBackground: customColors.blue,
+  headerColor: customColors.white,
+
+  errorColor: customColors.pink,
+
+  buttonColor: customColors.blue,
+  buttonBackground: customColors.white,
+  buttonBorder: customColors.blue,
+
+  logoColor: customColors.blue,
 };
 
 export const paddings = {

@@ -32,7 +32,7 @@ export default function App() {
         {!token ? (
           <Stack.Navigator
             initialRouteName={RoutesName.AUTH}
-            headerMode="screen"
+            headerMode={'none'}
             screenOptions={screenOptions}>
             {routesConfig.landingRoutes.map(({name, component, title}) => (
               <Stack.Screen

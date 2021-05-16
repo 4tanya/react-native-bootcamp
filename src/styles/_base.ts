@@ -25,6 +25,9 @@ export const colors = {
   buttonBorder: customColors.blue,
 
   logoColor: customColors.blue,
+
+  titleColor: customColors.pink,
+  valueColor: customColors.yellow,
 };
 
 export const paddings = {

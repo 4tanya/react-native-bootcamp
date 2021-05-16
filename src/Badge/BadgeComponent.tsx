@@ -1,11 +1,12 @@
 import React, {FC, useState, useEffect, useContext} from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import {UserContext} from '../context';
 import {Loader} from '../components';
 import BadgeProps from './BadgeProps';
 import styles from './styles';
 import BadgeService from './BadgeService';
+import BadgeRow from './BadgeRow';
 
 const BadgeComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
@@ -32,20 +33,15 @@ const BadgeComponent: FC = () => {
     <Loader loading={loading} />
   ) : (
     <View style={styles.container}>
-      <Text>
-        Full Name:{' '}
-        <Text
-          style={
-            styles.textValue
-          }>{`${user?.firstName} ${user?.lastName}`}</Text>
-      </Text>
-      <Text>
-        Date Of Birth: <Text style={styles.textValue}>{user?.dateOfBirth}</Text>
-      </Text>
-      <Text>
-        Member Id: <Text style={styles.textValue}>{user?.memberId}</Text>
-      </Text>
-      <QRCode value="https://globant.com" />
+      <View style={styles.qrcode}>
+        <QRCode value="https://globant.com" size={150} />
+      </View>
+      <BadgeRow
+        title={'Full Name:'}
+        value={`${user?.firstName} ${user?.lastName}`}
+      />
+      <BadgeRow title={'Date Of Birth:'} value={user?.dateOfBirth} />
+      <BadgeRow title={'Member Id:'} value={user?.memberId} />
     </View>
   );
 };

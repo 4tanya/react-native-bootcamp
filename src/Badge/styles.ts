@@ -1,13 +1,32 @@
 import {StyleSheet} from 'react-native';
-import {paddings, fonts} from '../styles/_base';
+import {paddings, fonts, colors} from '../styles/_base';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: 'stretch',
-    padding: paddings.md,
+    alignItems: 'center',
+    padding: paddings.lg,
+  },
+  textRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 250,
+  },
+  textKey: {
+    fontSize: fonts.md,
+    color: colors.titleColor,
+    paddingTop: paddings.sm,
+    paddingBottom: paddings.sm,
   },
   textValue: {
-    fontSize: fonts.lg,
+    fontSize: fonts.md,
+    color: colors.valueColor,
+  },
+  qrcode: {
+    alignItems: 'center',
+    paddingTop: paddings.lg,
+    paddingBottom: paddings.lg,
   },
 });

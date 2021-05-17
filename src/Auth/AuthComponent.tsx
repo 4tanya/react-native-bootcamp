@@ -56,7 +56,7 @@ const AuthComponent: FC = () => {
         )}
         name={FormFieldsName.MEMBER_ID}
         rules={{required: true}}
-        defaultValue={'111111'}
+        defaultValue={''}
       />
       {errors.memberId && (
         <Text style={styles.error}>{FormError.MEMBER_ID}</Text>
@@ -85,7 +85,7 @@ const AuthComponent: FC = () => {
         )}
         name={FormFieldsName.PASSWORD}
         rules={{required: true}}
-        defaultValue={'reactNative2021'}
+        defaultValue={''}
       />
       {errors.password && (
         <Text style={styles.error}>{FormError.PASSWORD}</Text>

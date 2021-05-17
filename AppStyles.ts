@@ -1,6 +1,6 @@
 import {StackNavigationOptions} from '@react-navigation/stack';
 import {DrawerNavigationOptions} from '@react-navigation/drawer';
-import {colors} from './src/styles/_base';
+import {colors, paddings} from './src/styles/_base';
 
 export const screenOptions: StackNavigationOptions = {
   headerTintColor: colors.headerColor,
@@ -14,4 +14,9 @@ export const screenOptions: StackNavigationOptions = {
 export const drawerOptions: DrawerNavigationOptions = {
   ...(screenOptions as DrawerNavigationOptions),
   headerShown: true,
+};
+
+export const drawerStyles = {
+  backgroundColor: colors.drawerBackground,
+  padding: paddings.md,
 };

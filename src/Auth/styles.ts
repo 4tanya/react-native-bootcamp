@@ -45,5 +45,6 @@ export default StyleSheet.create({
 
     alignItems: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
   },
 });

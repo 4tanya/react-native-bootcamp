@@ -8,6 +8,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   textKey: {
+    fontWeight: 'bold',
     fontSize: fonts.sm,
     paddingTop: paddings.sm,
     paddingBottom: paddings.sm,

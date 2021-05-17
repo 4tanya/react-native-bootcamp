@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {screenOptions, drawerOptions} from './AppStyles';
+import {screenOptions, drawerOptions, drawerStyles} from './AppStyles';
 
 import {UserContext} from './src/context';
 import routesConfig, {RoutesName} from './src/routes';
@@ -49,6 +49,7 @@ export default function App() {
           <Drawer.Navigator
             initialRouteName={RoutesName.BADGE}
             screenOptions={drawerOptions}
+            drawerStyle={drawerStyles}
             drawerContent={props => <DrawerContent {...{signOut, ...props}} />}>
             {routesConfig.appRoutes.map(({name, component, title}) => (
               <Drawer.Screen

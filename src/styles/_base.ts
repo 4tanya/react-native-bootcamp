@@ -34,6 +34,10 @@ export const colors = {
 
   tabTitleListColor: customColors.pink,
   tabTitleMapColor: customColors.yellow,
+
+  drawerBackground: customColors.white,
+  drawerColor: customColors.yellow,
+  drawerButtonColor: customColors.pink,
 };
 
 export const paddings = {

@@ -40,16 +40,18 @@ const LibrariesListComponent: FC = () => {
   };
   /** tabs */
 
-  const getLocation = () => {
-    GetLocation.getCurrentPosition({
-      enableHighAccuracy: true,
-      timeout: 15000,
-    })
-      .then(setLocation)
-      .catch(error => {
-        const {code, message} = error;
-        Alert.alert(code, message);
+  const getLocation = async () => {
+    try {
+      const locationFromServer = await GetLocation.getCurrentPosition({
+        enableHighAccuracy: true,
+        timeout: 15000,
       });
+
+      setLocation(locationFromServer);
+    } catch (error) {
+      const {code, message} = error;
+      Alert.alert(code, message);
+    }
   };
 
   const loadItems = async () => {

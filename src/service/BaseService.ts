@@ -14,7 +14,7 @@ export default class BaseService {
     token?: string;
     method?: Request['method'];
     headers?: Request['headers'];
-    body?: Request['body'];
+    body?: Request['body'] | string;
     errorText?: string;
   }): Promise<T | undefined> => {
     try {
@@ -22,17 +22,23 @@ export default class BaseService {
         Authorization: `Bearer ${token}`,
       };
 
+      const initHeaders = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        ...authHeader,
+      };
+
       const rawResponse = await fetch(`${apiUrl}${endpoint}`, {
         method,
         headers: {
+          ...initHeaders,
           ...headers,
-          ...authHeader,
         },
         body,
       });
 
       if (!rawResponse.ok) {
-        this.handleError(rawResponse); 
+        this.handleError(rawResponse);
       }
 
       return await rawResponse.json();

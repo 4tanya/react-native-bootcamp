@@ -6,11 +6,11 @@ import styles from './styles';
 import AuthService from './AuthService';
 import {
   UserValues,
-  UserData,
   FormFieldsName,
-  FormFieldsPlaceholder,
-  FormError,
+  FormFieldsPlaceholderKey,
+  FormErrorKey,
 } from './models';
+import enLocale from './translations/en';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 Ionicons.loadFont();
@@ -29,10 +29,10 @@ const AuthComponent: FC = () => {
 
   const signIn = async (body: UserValues) => {
     try {
-      const {userId, token} = (await service.post({
+      const {userId, token} = await service.post({
         body: JSON.stringify(body),
-        errorText: FormError.FORM,
-      })) as UserData;
+        errorText: enLocale[FormErrorKey.FORM],
+      });
 
       setUserId(userId);
       setToken(token);
@@ -51,7 +51,7 @@ const AuthComponent: FC = () => {
             value={value}
             keyboardType={'numeric'}
             maxLength={6}
-            placeholder={FormFieldsPlaceholder.MEMBER_ID}
+            placeholder={enLocale[FormFieldsPlaceholderKey.MEMBER_ID]}
           />
         )}
         name={FormFieldsName.MEMBER_ID}
@@ -59,7 +59,7 @@ const AuthComponent: FC = () => {
         defaultValue={''}
       />
       {errors.memberId && (
-        <Text style={styles.error}>{FormError.MEMBER_ID}</Text>
+        <Text style={styles.error}>{enLocale[FormErrorKey.MEMBER_ID]}</Text>
       )}
 
       <Controller
@@ -71,7 +71,7 @@ const AuthComponent: FC = () => {
               onChangeText={onChange}
               value={value}
               secureTextEntry={passHidden}
-              placeholder={FormFieldsPlaceholder.PASSWORD}
+              placeholder={enLocale[FormFieldsPlaceholderKey.PASSWORD]}
             />
             <TouchableOpacity
               onPress={() => setPassHidden(!passHidden)}
@@ -88,11 +88,13 @@ const AuthComponent: FC = () => {
         defaultValue={''}
       />
       {errors.password && (
-        <Text style={styles.error}>{FormError.PASSWORD}</Text>
+        <Text style={styles.error}>{enLocale[FormErrorKey.PASSWORD]}</Text>
       )}
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit(signIn)}>
-        <Text style={styles.button}>{FormFieldsPlaceholder.BUTTON}</Text>
+        <Text style={styles.button}>
+          {enLocale[FormFieldsPlaceholderKey.BUTTON]}
+        </Text>
       </TouchableOpacity>
     </View>
   );

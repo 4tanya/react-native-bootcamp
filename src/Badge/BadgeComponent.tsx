@@ -16,10 +16,9 @@ const BadgeComponent: FC = () => {
 
   const loadData = async () => {
     try {
-      const data = (await service.get({userId, token})) as BadgeProps;
+      const data = await service.get({userId, token});
       setUser(data);
-      setLoading(false);
-    } catch (err) {
+    } finally {
       setLoading(false);
     }
   };

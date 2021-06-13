@@ -9,14 +9,9 @@ export default class AuthService extends BaseService {
   }
 
   post = ({body, errorText}: {body: string; errorText: string}) => {
-    const headers = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    };
     return this.request<UserData | undefined>({
       endpoint,
       method: 'POST',
-      headers,
       body,
       errorText,
     });

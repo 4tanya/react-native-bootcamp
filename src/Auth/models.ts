@@ -13,14 +13,14 @@ export enum FormFieldsName {
   PASSWORD = 'password',
 }
 
-export enum FormFieldsPlaceholder {
-  MEMBER_ID = 'Enter your member id',
-  PASSWORD = 'Enter your password',
-  BUTTON = 'Sign In',
+export enum FormFieldsPlaceholderKey {
+  MEMBER_ID = 'placeholders-memberId',
+  PASSWORD = 'placeholders-password',
+  BUTTON = 'placeholders-button',
 }
 
-export enum FormError {
-  MEMBER_ID = 'Member id is required.',
-  PASSWORD = 'Password is required.',
-  FORM = 'Username or password are not valid',
+export enum FormErrorKey {
+  MEMBER_ID = 'errors-memberId',
+  PASSWORD = 'errors-password',
+  FORM = 'errors-form',
 }

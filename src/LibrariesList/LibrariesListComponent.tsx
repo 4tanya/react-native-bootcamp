@@ -5,7 +5,7 @@ import GetLocation, {Location} from 'react-native-get-location';
 import {UserContext} from '../context';
 import LibrariesListView from './LibrariesListView';
 import LibrariesMapView from './LibrariesMapView';
-import type {LibrariesList, RouteTab, LibrariesData} from './models';
+import type {LibrariesList, RouteTab} from './models';
 import {RoutesKey, RoutesTitle} from './models';
 import LibrariesListService from './LibrariesListService';
 import styles from './styles';
@@ -45,7 +45,7 @@ const LibrariesListComponent: FC = () => {
       enableHighAccuracy: true,
       timeout: 15000,
     })
-      .then(locationFromServer => setLocation(locationFromServer))
+      .then(setLocation)
       .catch(error => {
         const {code, message} = error;
         Alert.alert(code, message);
@@ -54,14 +54,13 @@ const LibrariesListComponent: FC = () => {
 
   const loadItems = async () => {
     try {
-      const {libraries} = (await service.get({
-        location: location as Location,
+      const {libraries} = await service.get({
+        location,
         token,
-      })) as LibrariesData;
+      });
 
       setData(libraries);
-      setLoading(false);
-    } catch (err) {
+    } finally {
       setLoading(false);
     }
   };

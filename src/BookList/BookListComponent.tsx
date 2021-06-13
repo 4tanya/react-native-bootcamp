@@ -2,15 +2,10 @@ import React, {useState, useEffect, useContext, FC} from 'react';
 import {View, Text, SectionList} from 'react-native';
 import {Loader} from '../components';
 import {UserContext} from '../context';
-import BookListProps, {
-  Book,
-  FilteredBookItem,
-  BookStatusTitle,
-} from './BookListProps';
+import {Book, FilteredBookItem, BookStatusTitle} from './BookListProps';
 import styles from './styles';
 import BookListService from './BookListService';
 import BookListItem from './BookListItem';
-import {colors} from '../styles/_base';
 
 const BookListComponent: FC = () => {
   const {userId, token} = useContext(UserContext);
@@ -22,10 +17,9 @@ const BookListComponent: FC = () => {
 
   const loadData = async () => {
     try {
-      const {books} = (await service.get({userId, token})) as BookListProps;
+      const {books} = await service.get({userId, token});
       setData(books);
-      setLoading(false);
-    } catch (err) {
+    } finally {
       setLoading(false);
     }
   };
@@ -46,8 +40,8 @@ const BookListComponent: FC = () => {
         return res;
       },
       [
-        {title: BookStatusTitle.NOT_RETURNED, data: [] as Book[]},
-        {title: BookStatusTitle.RETURNED, data: [] as Book[]},
+        {title: BookStatusTitle.NOT_RETURNED, data: []},
+        {title: BookStatusTitle.RETURNED, data: []},
       ],
     );
   };
